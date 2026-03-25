@@ -1,0 +1,30 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: ddmo
+  datasource:
+    url: jdbc:sqlite:${user.home}/.show/show.db
+    username: show
+    password: show
+    driver-class-name: org.sqlite.JDBC
+  main:
+    lazy-initialization: true
+  jmx:
+    enabled: false
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+
+logging:
+  level:
+    root: INFO
+    com.ddmo: DEBUG
+
+app:
+  jwt:
+    secret: 4f5f39309b8d5d75f2af1e46f6718cde4fcf39a267d35a8fd153b2b9d28036ab
+    expire-minutes: 720
+    tenant-aes-key: 734bf7fa2ac84ed6a2e839da8f0200c2
