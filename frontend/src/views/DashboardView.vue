@@ -446,6 +446,40 @@
         </div>
       </section>
 
+      <section v-if="activeNav === 'help'" class="card help-card">
+        <h3 class="card-title">使用帮助</h3>
+        <div class="help-wrap">
+          <div class="help-item">
+            <h4>1. 添加客户（会员）</h4>
+            <p>进入“会员管理”，填写姓名、手机号后点击“新增”。校验码可手动填写；如不填写，系统默认使用手机号后四位。</p>
+          </div>
+          <div class="help-item">
+            <h4>2. 添加员工</h4>
+            <p>进入“员工管理”，输入员工姓名并保存。停用员工不会删除历史数据，恢复后可继续使用。</p>
+          </div>
+          <div class="help-item">
+            <h4>3. 会员充值</h4>
+            <p>进入“充值消费”中的“会员充值”，在下拉框输入姓名或手机号选择会员，填写金额后确认充值。</p>
+          </div>
+          <div class="help-item">
+            <h4>4. 会员扣费（消费）</h4>
+            <p>在“会员消费”中选择会员、员工和服务，输入消费金额与校验码后确认。校验码需与会员档案一致才可扣费。</p>
+          </div>
+          <div class="help-item">
+            <h4>5. 修改密码</h4>
+            <p>点击右上角“系统管理”，在弹窗中输入旧密码和新密码完成修改。修改成功后需重新登录。</p>
+          </div>
+          <div class="help-item">
+            <h4>6. 导出数据</h4>
+            <p>在会员、交易、报表页可导出 CSV。桌面版会弹出保存窗口，网页版会直接下载文件。</p>
+          </div>
+          <div class="help-item help-alert">
+            <h4>❗ 重要提示</h4>
+            <p>客户数据存储在 <code>C:\Users\{用户}\.show</code> 目录，请勿删除该目录及其中数据库文件。</p>
+          </div>
+        </div>
+      </section>
+
       <transition name="fade">
         <div v-if="toast" class="toast">{{ toast }}</div>
       </transition>
@@ -484,7 +518,8 @@ const navItems = [
   { key: 'employees', label: '员工管理' },
   { key: 'reports', label: '报表分析' },
   { key: 'audit', label: '审计日志' },
-  { key: 'settings', label: '系统配置' }
+  { key: 'settings', label: '系统配置' },
+  { key: 'help', label: '使用帮助' }
 ]
 
 const activeNav = ref('dashboard')
@@ -1824,6 +1859,48 @@ th {
   grid-template-columns: 1fr;
 }
 
+.help-card {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.help-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.help-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fafbff;
+  padding: 12px;
+}
+
+.help-item h4 {
+  margin: 0 0 8px;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.help-item p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.help-alert {
+  grid-column: 1 / -1;
+  border-color: #f59e0b;
+  background: #fff8eb;
+}
+
+.help-alert h4 {
+  color: #b45309;
+}
+
 @media (max-width: 1100px) {
   .stats-section {
     grid-template-columns: 1fr 1fr;
@@ -1839,6 +1916,10 @@ th {
 
   .summary-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .help-wrap {
+    grid-template-columns: 1fr;
   }
 }
 </style>
