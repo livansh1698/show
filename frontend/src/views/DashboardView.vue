@@ -697,7 +697,16 @@ function money(value) {
 function dateTime(v) {
   if (!v) return ''
   const d = new Date(v)
-  return d.toLocaleString('zh-CN', { hour12: false })
+  // 1. 获取年、月、日、时、分、秒
+  const year = d.getFullYear()
+  const month = (d.getMonth() + 1).toString().padStart(2, '0') // 月份从0开始，需+1；补0
+  const day = d.getDate().toString().padStart(2, '0')         // 补0
+  const hours = d.getHours().toString().padStart(2, '0')
+  const minutes = d.getMinutes().toString().padStart(2, '0')
+  const seconds = d.getSeconds().toString().padStart(2, '0')
+
+  // 2. 拼接字符串，中间加上空格
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 }
 
 function notify(msg) {
